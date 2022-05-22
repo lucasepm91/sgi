@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "9c7abfe6-449d-4bd8-b9a2-0864f50e2dda": {
+      "ProjectGuid": "9c7abfe6-449d-4bd8-b9a2-0864f50e2dda",
+      "DisplayName": "Sgi",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Arquivos Diversos",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
