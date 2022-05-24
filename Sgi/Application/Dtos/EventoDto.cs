@@ -17,6 +17,7 @@
         public string Bairro { get; set; }
         public string EnderecoCompleto { get; set; }
         public string Complemento { get; set; }
+        public UsuarioDto Organizador { get; set; }
         public List<SessaoDto> Sessoes { get; set; }
     }
 }

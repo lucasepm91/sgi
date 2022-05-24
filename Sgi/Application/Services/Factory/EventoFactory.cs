@@ -24,6 +24,7 @@ namespace Sgi.Application.Services.Factory
                 Bairro = evento.Endereco.Bairro,
                 EnderecoCompleto = evento.Endereco.EnderecoCompleto,
                 Complemento = evento.Endereco.Complemento,
+                Organizador = UsuarioFactory.CriarUsuarioDto(evento.Organizador),
                 Sessoes = new List<SessaoDto>()
             };
 

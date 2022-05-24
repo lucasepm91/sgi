@@ -1,4 +1,5 @@
-﻿using Sgi.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using Sgi.Domain;
 using Sgi.Repository.Contexts;
 
 namespace Sgi.Repository
@@ -21,6 +22,6 @@ namespace Sgi.Repository
         public async Task InserirEventoAsync(Evento evento) => await _context.Evento.AddAsync(evento).ConfigureAwait(false);
         public async Task InserirSessoesAsync(IEnumerable<Sessao> sessoes) => await _context.Sessao.AddRangeAsync(sessoes).ConfigureAwait(false);
         public async Task InserirSessaoAsync(Sessao sessao) => await _context.Sessao.AddAsync(sessao).ConfigureAwait(false);
-        public Evento BuscarEventoPorId(Guid id) => _context.Evento.Where(ev => ev.Id == id).FirstOrDefault();
+        public Evento BuscarEventoPorId(Guid id) => _context.Evento.Where(ev => ev.Id == id).Include(ev => ev.Sessoes).Include(ev => ev.Organizador).FirstOrDefault();
     }
 }
