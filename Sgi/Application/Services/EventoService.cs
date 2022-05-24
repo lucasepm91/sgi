@@ -47,7 +47,7 @@ namespace Sgi.Application.Services
             }
             catch (Exception ex)
             {
-                var message = ex.Message;
+                throw new ErroInternoException(ex.Message);
             }
 
             evento.Sessoes = sessoes.ToList();
