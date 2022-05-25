@@ -27,5 +27,7 @@ namespace Sgi.Repository
                                 .Where(ev => string.Compare(ev.Nome, nome, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
         public IEnumerable<Evento> BuscarEventoPorTipo(string tipo) => _context.Evento.Include(ev => ev.Sessoes).Include(ev => ev.Organizador).AsEnumerable()
                                 .Where(ev => string.Compare(ev.Tipo, tipo, StringComparison.OrdinalIgnoreCase) == 0);
+        public IEnumerable<Evento> BuscarHistoricoEventos(Guid idOrganizador) => _context.Evento.Include(ev => ev.Sessoes).Include(ev => ev.Organizador).AsEnumerable()
+                                .Where(ev => ev.UsuarioId == idOrganizador);
     }
 }

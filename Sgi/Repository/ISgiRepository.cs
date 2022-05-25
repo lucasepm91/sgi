@@ -16,5 +16,6 @@ namespace Sgi.Repository
         Evento BuscarEventoPorId(Guid id);
         Evento BuscarEventoPorNome(string nome);
         IEnumerable<Evento> BuscarEventoPorTipo(string tipo);
+        IEnumerable<Evento> BuscarHistoricoEventos(Guid idOrganizador);
     }
 }

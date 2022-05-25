@@ -8,5 +8,6 @@ namespace Sgi.Application.Interfaces
         EventoDto BuscarEventoPorId(string id);
         EventoDto BuscarEventoPorNome(string nome);
         IEnumerable<EventoDto> BuscarEventoPorTipo(string tipo);
+        IEnumerable<EventoDto> BuscarHistoricoEventos(string id);
     }
 }

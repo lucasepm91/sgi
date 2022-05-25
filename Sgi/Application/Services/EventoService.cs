@@ -88,5 +88,19 @@ namespace Sgi.Application.Services
 
             return dtos;
         }
+
+        public IEnumerable<EventoDto> BuscarHistoricoEventos(string id)
+        {
+            var eventos = _sgiRepository.BuscarHistoricoEventos(new Guid(id));
+            var dtos = new List<EventoDto>();
+
+            if (eventos == null || !eventos.Any())
+                throw new NaoEncontradoException("Evento não encontrado!");
+
+            foreach (var evento in eventos)
+                dtos.Add(EventoFactory.CriarEventoDto(evento));
+
+            return dtos;
+        }
     }
 }

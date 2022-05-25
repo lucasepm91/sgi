@@ -28,7 +28,7 @@ namespace Sgi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
         [SwaggerOperation("Buscar evento por id", "Buscar evento por id")]
-        public EventoDto BuscarEventoPorIdAsync([FromRoute] string id)
+        public EventoDto BuscarEventoPorId([FromRoute] string id)
         {
             return _eventoService.BuscarEventoPorId(id);
         }
@@ -42,7 +42,7 @@ namespace Sgi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
         [SwaggerOperation("Buscar evento por nome", "Buscar evento por nome")]
-        public EventoDto BuscarEventoPorNomeAsync([FromRoute] string nome)
+        public EventoDto BuscarEventoPorNome([FromRoute] string nome)
         {
             return _eventoService.BuscarEventoPorNome(nome);
         }
@@ -56,9 +56,23 @@ namespace Sgi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
         [SwaggerOperation("Buscar evento por tipo", "Buscar evento por tipo")]
-        public IEnumerable<EventoDto> BuscarEventoPorTipoAsync([FromRoute] string tipo)
+        public IEnumerable<EventoDto> BuscarEventoPorTipo([FromRoute] string tipo)
         {
             return _eventoService.BuscarEventoPorTipo(tipo);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("evento/historico/{id}")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Operação realizada com sucesso", typeof(IEnumerable<EventoDto>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Recurso não encontrado")]
+        [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Falha no processamento da requisição", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerOperation("Buscar histórico de eventos do organizador", "Buscar histórico de eventos do organizador")]
+        public IEnumerable<EventoDto> BuscarHistoricoEventos([FromRoute] string id)
+        {
+            return _eventoService.BuscarHistoricoEventos(id);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
