@@ -64,5 +64,29 @@ namespace Sgi.Application.Services
 
             return EventoFactory.CriarEventoDto(evento);
         }
+
+        public EventoDto BuscarEventoPorNome(string nome)
+        {
+            var evento = _sgiRepository.BuscarEventoPorNome(nome);
+
+            if (evento == null)
+                throw new NaoEncontradoException("Evento não encontrado!");
+
+            return EventoFactory.CriarEventoDto(evento);
+        }
+
+        public IEnumerable<EventoDto> BuscarEventoPorTipo(string tipo)
+        {
+            var eventos = _sgiRepository.BuscarEventoPorTipo(tipo);
+            var dtos = new List<EventoDto>();
+
+            if (eventos == null || !eventos.Any())
+                throw new NaoEncontradoException("Evento não encontrado!");
+
+            foreach(var evento in eventos)
+                dtos.Add(EventoFactory.CriarEventoDto(evento));
+
+            return dtos;
+        }
     }
 }

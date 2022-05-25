@@ -6,5 +6,7 @@ namespace Sgi.Application.Interfaces
     {
         Task<EventoDto> CriarEventoAsync(EventoDto eventoDto);
         EventoDto BuscarEventoPorId(string id);
+        EventoDto BuscarEventoPorNome(string nome);
+        IEnumerable<EventoDto> BuscarEventoPorTipo(string tipo);
     }
 }

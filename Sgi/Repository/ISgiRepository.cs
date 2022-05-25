@@ -14,5 +14,7 @@ namespace Sgi.Repository
         Task InserirSessaoAsync(Sessao sessao);
         Task InserirSessoesAsync(IEnumerable<Sessao> sessoes);
         Evento BuscarEventoPorId(Guid id);
+        Evento BuscarEventoPorNome(string nome);
+        IEnumerable<Evento> BuscarEventoPorTipo(string tipo);
     }
 }

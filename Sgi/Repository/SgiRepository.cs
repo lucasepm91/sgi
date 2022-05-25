@@ -23,5 +23,9 @@ namespace Sgi.Repository
         public async Task InserirSessoesAsync(IEnumerable<Sessao> sessoes) => await _context.Sessao.AddRangeAsync(sessoes).ConfigureAwait(false);
         public async Task InserirSessaoAsync(Sessao sessao) => await _context.Sessao.AddAsync(sessao).ConfigureAwait(false);
         public Evento BuscarEventoPorId(Guid id) => _context.Evento.Where(ev => ev.Id == id).Include(ev => ev.Sessoes).Include(ev => ev.Organizador).FirstOrDefault();
+        public Evento BuscarEventoPorNome(string nome) => _context.Evento.Include(ev => ev.Sessoes).Include(ev => ev.Organizador).AsEnumerable()
+                                .Where(ev => string.Compare(ev.Nome, nome, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+        public IEnumerable<Evento> BuscarEventoPorTipo(string tipo) => _context.Evento.Include(ev => ev.Sessoes).Include(ev => ev.Organizador).AsEnumerable()
+                                .Where(ev => string.Compare(ev.Tipo, tipo, StringComparison.OrdinalIgnoreCase) == 0);
     }
 }
