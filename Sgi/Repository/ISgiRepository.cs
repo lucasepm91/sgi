@@ -11,11 +11,16 @@ namespace Sgi.Repository
         void DeletarUsuario(Usuario usuario);
 
         Task InserirEventoAsync(Evento evento);
+        Sessao BuscarSessaoPorId(Guid id);
         Task InserirSessaoAsync(Sessao sessao);
         Task InserirSessoesAsync(IEnumerable<Sessao> sessoes);
         Evento BuscarEventoPorId(Guid id);
         Evento BuscarEventoPorNome(string nome);
         IEnumerable<Evento> BuscarEventoPorTipo(string tipo);
         IEnumerable<Evento> BuscarHistoricoEventos(Guid idOrganizador);
+
+        IEnumerable<Compra> BuscarHistoricoCompras(Guid idCliente);
+        Task InserirIngressosAsync(IEnumerable<Ingresso> ingressos);
+        Task InserirCompraAsync(Compra compra);
     }
 }

@@ -120,5 +120,18 @@ namespace Sgi.Controllers
         {
             await _usuarioService.DeletarUsuarioAsync(id);            
         }
+
+        [HttpPost("usuario/{id}/carteira")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Operação realizada com sucesso", typeof(UsuarioDto))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Recurso não encontrado")]
+        [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Falha no processamento da requisição", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerOperation("Cadastro de usuário", "Cadastro de usuário")]
+        public async Task<ActionResult<UsuarioDto>> CadastrarUsuarioAsync([FromBody] string codigo, [FromRoute] string id)
+        {
+            return await _usuarioService.AdicionarValorCarteiraAsync(id, codigo);
+        }
     }
 }

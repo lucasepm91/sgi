@@ -105,5 +105,24 @@ namespace Sgi.Application.Services
             await _sgiRepository.CommitAsync();
             return UsuarioFactory.CriarUsuarioDto(encontrado);
         }
+
+        public async Task<UsuarioDto> AdicionarValorCarteiraAsync(string id, string codigo)
+        {
+            Usuario usuario = _sgiRepository.BuscarUsuarioPorId(new Guid(id));
+            codigo = codigo ?? string.Empty;
+            int.TryParse(codigo.Substring(3, 5), out int valor);
+
+            if (usuario == null)
+                throw new NaoEncontradoException("Usuário não encontrado!");
+
+            if (codigo.Length != 5 || (valor != 20 && valor != 50))
+            {
+                throw new RegraDeNegocioException("Código inválido");
+            }
+
+            usuario.SaldoCarteira += valor;
+            await _sgiRepository.CommitAsync();
+            return UsuarioFactory.CriarUsuarioDto(usuario);
+        }
     }
 }
