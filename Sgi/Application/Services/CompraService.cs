@@ -58,13 +58,7 @@ namespace Sgi.Application.Services
             try
             {
                 await _sgiRepository.InserirCompraAsync(compra);
-                await _sgiRepository.CommitAsync();
-
-                foreach (var ingresso in ingressos)
-                    ingresso.CompraId = compra.Id;
-
-                await _sgiRepository.InserirIngressosAsync(ingressos);
-                await _sgiRepository.CommitAsync();
+                await _sgiRepository.CommitAsync();                
             }
             catch(Exception ex)
             {
@@ -80,7 +74,7 @@ namespace Sgi.Application.Services
                                                                                 : sessao.MapaDeLugares.Reservados + "|" + ingressoDto.Codigo.ToUpperInvariant();
             sessao.MapaDeLugares.Reservados = descricaoReservados;
             var descricaoLivres = sessao.MapaDeLugares.Livres.Split('|').ToList();
-            var filtrados = descricaoLivres.Where(l => l.Contains(ingressoDto.Codigo));
+            var filtrados = descricaoLivres.Where(l => !l.Contains(ingressoDto.Codigo));
             var descricaoFiltrada = string.Empty;
 
             foreach (var item in filtrados)

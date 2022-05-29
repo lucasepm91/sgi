@@ -14,7 +14,7 @@ namespace Sgi.CrossCutting.Exceptions
 
         public ServicoIndisponivelException() { }
 
-        public ServicoIndisponivelException(string message) : base(message) { }
+        public ServicoIndisponivelException(string message) : base(message) { Erro = message; }
 
         protected ServicoIndisponivelException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 

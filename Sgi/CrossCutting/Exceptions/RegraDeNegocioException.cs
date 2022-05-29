@@ -14,7 +14,7 @@ namespace Sgi.CrossCutting.Exceptions
 
         public RegraDeNegocioException() { }
 
-        public RegraDeNegocioException(string message) : base(message) { }
+        public RegraDeNegocioException(string message) : base(message) { Erro = message; }
 
         protected RegraDeNegocioException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 

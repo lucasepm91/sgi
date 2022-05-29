@@ -8,10 +8,7 @@ namespace Sgi.Application.Services.Validations
         public static string ValidarCompra(CompraDto compraDto)
         {
             if (compraDto.Total < 0)
-                return "Valor da compra não pode ser negativo";
-
-            if (string.IsNullOrWhiteSpace(compraDto.Data) || DateTime.TryParse(compraDto.Data, out _))
-                return "Data da compra inválida";
+                return "Valor da compra não pode ser negativo";           
 
             if (string.IsNullOrWhiteSpace(compraDto.FormaPagamento) ||
                 (compraDto.FormaPagamento != FormaPagamentoConst.CarteiraVirtual && compraDto.FormaPagamento != FormaPagamentoConst.TransacaoBancaria))

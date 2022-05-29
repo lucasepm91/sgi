@@ -14,7 +14,7 @@ namespace Sgi.CrossCutting.Exceptions
 
         public ErroInternoException() { }
 
-        public ErroInternoException(string message) : base(message) { }
+        public ErroInternoException(string message) : base(message) { Erro = message; }
 
         protected ErroInternoException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 

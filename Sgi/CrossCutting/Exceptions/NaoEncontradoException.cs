@@ -14,7 +14,7 @@ namespace Sgi.CrossCutting.Exceptions
 
         public NaoEncontradoException() { }
 
-        public NaoEncontradoException(string message) : base(message) { }
+        public NaoEncontradoException(string message) : base(message) { Erro = message; }
 
         protected NaoEncontradoException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 

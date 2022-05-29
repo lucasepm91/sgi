@@ -29,7 +29,7 @@ namespace Sgi.Application.Services.Factory
             var compra = new Compra
             {
                 Id = Guid.NewGuid(),
-                Data = DateTime.Parse(compraDto.Data),
+                Data = DateTime.Now,
                 FormaPagamento = compraDto.FormaPagamento,
                 Total = compraDto.Total,
                 UsuarioId = new Guid(compraDto.UsuarioId)

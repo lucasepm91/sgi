@@ -14,7 +14,7 @@ namespace Sgi.CrossCutting.Exceptions
 
         public NaoAutorizadoException() { }
 
-        public NaoAutorizadoException(string message) : base(message) { }
+        public NaoAutorizadoException(string message) : base(message) { Erro = message; }
 
         protected NaoAutorizadoException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 
