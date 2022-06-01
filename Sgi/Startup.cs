@@ -43,6 +43,14 @@ namespace Sgi
                     };
                 });
             
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.WithOrigins("*")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin();
+            }));
+
             services.AddSwaggerConfig(Configuration);            
         }
 
@@ -66,6 +74,7 @@ namespace Sgi
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseApiError();
+            app.UseCors("CorsPolicy");
             app.UseResponseCompression();
             app.UseEndpoints(endpoints =>
             {
