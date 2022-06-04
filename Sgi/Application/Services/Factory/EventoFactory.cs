@@ -37,7 +37,7 @@ namespace Sgi.Application.Services.Factory
                         Id = sessao.Id.ToString(),
                         EventoId = evento.Id.ToString(),
                         CodigoLocal = sessao.CodigoLocal,
-                        Data = sessao.Data,
+                        Data = sessao.Data.ToString("dd/MM/yyyy HH:mm"),
                         Lotacao = sessao.Lotacao,
                         IngressosVendidos = sessao.IngressosVendidos,
                         Esquema = sessao.MapaDeLugares.Esquema,
@@ -86,7 +86,7 @@ namespace Sgi.Application.Services.Factory
                         Id = string.IsNullOrWhiteSpace(sessaoDto.Id) ? Guid.NewGuid() : new Guid(sessaoDto.Id),
                         EventoId = evento.Id,
                         CodigoLocal = sessaoDto.CodigoLocal,
-                        Data = sessaoDto.Data,
+                        Data = DateTime.Parse(sessaoDto.Data),
                         Lotacao = sessaoDto.Lotacao,
                         IngressosVendidos = sessaoDto.IngressosVendidos,
                         MapaDeLugares = new MapaDeLugares

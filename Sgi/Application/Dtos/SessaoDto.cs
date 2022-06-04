@@ -4,7 +4,7 @@
     {
         public string Id { get; set; }
         public string EventoId { get; set; }
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
         public int Lotacao { get; set; }
         public int IngressosVendidos { get; set; }
         public string CodigoLocal { get; set; }

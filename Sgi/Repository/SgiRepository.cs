@@ -31,8 +31,8 @@ namespace Sgi.Repository
         public IEnumerable<Evento> BuscarHistoricoEventos(Guid idOrganizador) => _context.Evento.Include(ev => ev.Sessoes).Include(ev => ev.Organizador).AsEnumerable()
                                 .Where(ev => ev.UsuarioId == idOrganizador);
 
-        public IEnumerable<Compra> BuscarHistoricoCompras(Guid idCliente) => _context.Compra.Include(c => c.Cliente).Include(c => c.Ingressos).AsEnumerable()
-                                .Where(c => c.UsuarioId == idCliente);
+        public IEnumerable<Compra> BuscarHistoricoCompras(Guid idCliente) => _context.Compra.Include(c => c.Cliente).Include(c => c.Ingressos).ThenInclude(i=>i.Sessao).ThenInclude(i => i.Evento)
+                                .AsEnumerable().Where(c => c.UsuarioId == idCliente);
         public async Task InserirIngressosAsync(IEnumerable<Ingresso> ingressos) => await _context.Ingresso.AddRangeAsync(ingressos).ConfigureAwait(false);
         public async Task InserirCompraAsync(Compra compra) => await _context.Compra.AddAsync(compra).ConfigureAwait(false);
     }

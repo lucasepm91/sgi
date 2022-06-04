@@ -48,6 +48,13 @@ namespace Sgi.Application.Services.Factory
 
         public static IngressoDto CriarIngressoDto(Ingresso ingresso)
         {
+            string endereco = null;
+
+            if (!string.IsNullOrWhiteSpace(ingresso.Evento.Endereco?.EnderecoCompleto))
+            {
+                string complemento = !string.IsNullOrWhiteSpace(ingresso.Evento.Endereco.Complemento) ? ", " + ingresso.Evento.Endereco.Complemento : string.Empty;
+                endereco = ingresso.Evento.Endereco.EnderecoCompleto + complemento;
+            }
             return new IngressoDto
             {
                 Id = ingresso.Id.ToString(),
@@ -55,7 +62,11 @@ namespace Sgi.Application.Services.Factory
                 Preco = ingresso.Preco,
                 CompraId = ingresso.CompraId.ToString(),
                 SessaoId = ingresso.SessaoId.ToString(),
-                EventoId = ingresso.EventoId.ToString()
+                EventoId = ingresso.EventoId.ToString(),
+                NomeEvento = ingresso.Evento.Nome,
+                DataSessao = ingresso.Sessao.Data.ToString("dd/MM/yyyy HH:mm"),
+                LinkStream = ingresso.Evento.LinkStream,
+                Endereco =  endereco
             };
         }
 
