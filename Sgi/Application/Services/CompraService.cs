@@ -35,6 +35,7 @@ namespace Sgi.Application.Services
 
         public async Task<CompraDto> ProcessarCompraAsync(CompraDto compraDto)
         {
+            var usuario = _sgiRepository.BuscarUsuarioPorId(new Guid(compraDto.UsuarioId));
             string validacao = CompraValidation.ValidarCompra(compraDto);
 
             if (validacao != null)
@@ -49,7 +50,8 @@ namespace Sgi.Application.Services
                 ingressos.Add(CompraFactory.CriarIngresso(ingressoDto, sessao, evento));
                 
                 sessao.IngressosVendidos++;
-                if(evento.Modalidade == ModalidadeConst.Presencial)
+                usuario.SaldoCarteira -= evento.Preco;
+                if (evento.Modalidade == ModalidadeConst.Presencial)
                     AtualizarLugaresAposCompra(sessao, ingressoDto);
             }
 
