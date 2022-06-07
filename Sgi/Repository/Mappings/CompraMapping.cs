@@ -19,6 +19,9 @@ namespace Sgi.Repository.Mappings
                 builder.Property(c => c.Total).HasColumnName("TOTAL");
 
                 builder.HasOne(c => c.Cliente).WithOne().HasForeignKey<Compra>(c => c.UsuarioId);
+
+                builder.Navigation(builder => builder.Cliente).IsRequired();
+                builder.Navigation(builder => builder.Ingressos);
             }
         }
     }

@@ -19,8 +19,8 @@ namespace Sgi.Repository.Mappings
                 builder.Property(i => i.Codigo).HasColumnName("CODIGO");
                 builder.Property(i => i.Preco).HasColumnName("PRECO");
 
-                builder.HasOne(i => i.Evento).WithOne().HasForeignKey<Ingresso>(i => i.EventoId);
-                builder.HasOne(i => i.Sessao).WithOne().HasForeignKey<Ingresso>(i => i.SessaoId);
+                /*builder.HasOne(i => i.Evento).WithOne().HasForeignKey<Ingresso>(i => i.EventoId);
+                builder.HasOne(i => i.Sessao).WithOne().HasForeignKey<Ingresso>(i => i.SessaoId);*/
 
                 builder.HasOne(i => i.Compra).WithMany(i => i.Ingressos).HasForeignKey(i => i.CompraId);
             }
