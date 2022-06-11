@@ -128,8 +128,8 @@ namespace Sgi.Controllers
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Falha no processamento da requisição", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
-        [SwaggerOperation("Cadastro de usuário", "Cadastro de usuário")]
-        public async Task<ActionResult<UsuarioDto>> CadastrarUsuarioAsync([FromBody] string codigo, [FromRoute] string id)
+        [SwaggerOperation("Adicionar fundos carteira", "Adicionar fundos carteira")]
+        public async Task<ActionResult<UsuarioDto>> AdicionarFundosAsync([FromBody] CodigoCarteira codigo, [FromRoute] string id)
         {
             return await _usuarioService.AdicionarValorCarteiraAsync(id, codigo);
         }

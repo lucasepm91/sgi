@@ -11,6 +11,6 @@ namespace Sgi.Application.Interfaces
         Task<UsuarioDto> CriarUsuarioAsync(UsuarioDto usuarioDto);
         Task DeletarUsuarioAsync(string id);
         Task<UsuarioDto> AtualizarUsuarioAsync(UsuarioDto usuarioDto);
-        Task<UsuarioDto> AdicionarValorCarteiraAsync(string id, string codigo);
+        Task<UsuarioDto> AdicionarValorCarteiraAsync(string id, CodigoCarteira codigo);
     }
 }
