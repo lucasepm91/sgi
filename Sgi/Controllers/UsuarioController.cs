@@ -142,7 +142,7 @@ namespace Sgi.Controllers
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Falha no processamento da requisição", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
         [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
-        [SwaggerOperation("Envio de email para o Sac", "Envio de email para o Sa")]
+        [SwaggerOperation("Envio de email para o Sac", "Envio de email para o Sac")]
         public void EnviarEmail([FromBody] EmailDto emailDto)
         {
             _usuarioService.EnviarContatoEmail(emailDto);
