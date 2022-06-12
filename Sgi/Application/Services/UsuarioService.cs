@@ -1,11 +1,15 @@
-﻿using Sgi.Application.Dtos;
+﻿using Microsoft.Extensions.Options;
+using Sgi.Application.Dtos;
 using Sgi.Application.Interfaces;
 using Sgi.Application.Services.Factory;
 using Sgi.Application.Services.Validations;
 using Sgi.CrossCutting.Exceptions;
+using Sgi.CrossCutting.Options;
+using Sgi.DistributedServices;
 using Sgi.Domain;
 using Sgi.Repository;
 using Sgi.Security;
+using System.Text;
 
 namespace Sgi.Application.Services
 {
@@ -13,11 +17,16 @@ namespace Sgi.Application.Services
     {
         private readonly ICriptografiaService _criptografiaService;
         private readonly ISgiRepository _sgiRepository;
+        private readonly IEnvioEmailService _envioEmailService;
+        private readonly SmtpOptions _smtpOptions;
 
-        public UsuarioService(ICriptografiaService criptografiaService, ISgiRepository sgiRepository)
+        public UsuarioService(ICriptografiaService criptografiaService, ISgiRepository sgiRepository,
+                                IEnvioEmailService envioEmailService, IOptionsMonitor<SmtpOptions> smtpOptions)
         {
             _criptografiaService = criptografiaService;
             _sgiRepository = sgiRepository;
+            _envioEmailService = envioEmailService;
+            _smtpOptions = smtpOptions.CurrentValue;
         }
 
         public UsuarioDto BuscarUsuarioParaAutenticacao(LoginDto loginDto)
@@ -123,6 +132,25 @@ namespace Sgi.Application.Services
             usuario.SaldoCarteira += valor;
             await _sgiRepository.CommitAsync();
             return UsuarioFactory.CriarUsuarioDto(usuario);
+        }
+
+        public void EnviarContatoEmail(EmailDto emailDto)
+        {
+            try
+            {
+                using var client = _envioEmailService.CriarSmtpClient();
+                var conteudo = new StringBuilder();
+
+                conteudo.AppendLine(emailDto.Mensagem);
+                conteudo.AppendLine("Enviado por: " + emailDto.Email);
+                using var mensagem = _envioEmailService.CriarMensagemEmail(emailDto.Assunto, conteudo.ToString(), _smtpOptions.Sac);
+
+                _envioEmailService.EnviarEmail(client, mensagem);                
+            }
+            catch (Exception ex)
+            {
+                throw new ErroInternoException(ex.Message);
+            }
         }
     }
 }

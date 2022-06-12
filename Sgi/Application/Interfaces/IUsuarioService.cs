@@ -12,5 +12,6 @@ namespace Sgi.Application.Interfaces
         Task DeletarUsuarioAsync(string id);
         Task<UsuarioDto> AtualizarUsuarioAsync(UsuarioDto usuarioDto);
         Task<UsuarioDto> AdicionarValorCarteiraAsync(string id, CodigoCarteira codigo);
+        void EnviarContatoEmail(EmailDto emailDto);
     }
 }

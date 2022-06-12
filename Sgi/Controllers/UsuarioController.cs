@@ -121,6 +121,7 @@ namespace Sgi.Controllers
             await _usuarioService.DeletarUsuarioAsync(id);            
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("usuario/{id}/carteira")]
         [SwaggerResponse(StatusCodes.Status200OK, "Operação realizada com sucesso", typeof(UsuarioDto))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "Falha na operação", typeof(ResponseErro))]
@@ -132,6 +133,19 @@ namespace Sgi.Controllers
         public async Task<ActionResult<UsuarioDto>> AdicionarFundosAsync([FromBody] CodigoCarteira codigo, [FromRoute] string id)
         {
             return await _usuarioService.AdicionarValorCarteiraAsync(id, codigo);
+        }
+
+        [HttpPost("usuario/contato")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Operação realizada com sucesso")]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Recurso não encontrado")]
+        [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Falha no processamento da requisição", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, "Erro interno no servidor", typeof(ResponseErro))]
+        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "Falha na operação", typeof(ResponseErro))]
+        [SwaggerOperation("Envio de email para o Sac", "Envio de email para o Sa")]
+        public void EnviarEmail([FromBody] EmailDto emailDto)
+        {
+            _usuarioService.EnviarContatoEmail(emailDto);
         }
     }
 }
