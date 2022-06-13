@@ -1,4 +1,5 @@
 ﻿using Sgi.Application.Dtos;
+using Sgi.CrossCutting.Constants;
 using Sgi.Domain;
 
 namespace Sgi.Application.Services.Factory
@@ -75,7 +76,7 @@ namespace Sgi.Application.Services.Factory
             return new Ingresso
             {
                 Id = Guid.NewGuid(),
-                Codigo = ingressoDto.Codigo,
+                Codigo = evento.Modalidade == ModalidadeConst.Presencial ? ingressoDto.Codigo : Guid.NewGuid().ToString(),
                 Preco = ingressoDto.Preco,
                 SessaoId = new Guid(ingressoDto.SessaoId),
                 EventoId = new Guid(ingressoDto.EventoId),

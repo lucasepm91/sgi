@@ -4,7 +4,7 @@
     {
         public const string Filme = "filme";
         public const string Show = "show";
-        public const string PecaTeatro = "peca_teatro";
+        public const string PecaTeatro = "peca";
         public const string Palestra = "palestra";
     }
 }
